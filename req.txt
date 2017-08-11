@@ -1,0 +1,26 @@
+1. Problem Statement:
+A restaurant menu app which allows user to view details about different restaurants in an area.
+It has CRUD operations available for the user, and authorization and login checks for every user.
+You can view the location on maps and while you are logged in you can get the details on your mobile phone too.
+
+
+1. Technical breakdown:
+1. Frontend screens:
+      login screen, login error screen.
+      all restaurants display screen
+      menu display screen based on authorization, navigable from the all restaurant screen
+      restaurant, create/edit/delete screens
+      menu, create/edit/delete screens.
+      google map display of restaurants, some more information if required.
+
+
+2. Backend details:
+    Oauth: using Facebook, Google Sign In
+    Backend : Using Flask and SQLAlchemy, will try to use mongo also if time permits
+
+3. Frontend implementation:
+    Style: Bootstrap and Custom CSS
+    Behavior: Angular JS and Custom JS, Jquery
+    Single Page: AJAX
+
+4. API usage: Zomato, Google Maps, Instagram,Foursquare,Google streetview

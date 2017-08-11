@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>
+        New Menu
+    </title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+   
+
+    <div class="container">
+
+         <h1> Create a new menu for restaurant {{ restaurant.name }} </h1>
+
+    <form action="{{url_for('createNewMenu',rest_id=restaurant.id)}}" method='POST'>
+        <div class="form-group">
+    <dl>
+        <dt>
+            <p>Name:</p>
+        </dt>
+        <dd><input type='text' size='30' placeholder='Menu Name' name='name'></dd>
+
+        <dt>
+            <p>Description:</p>
+        </dt>
+
+        <dd><input type='text' size='30' placeholder = 'Description' name='desc'></dd>
+
+
+        <dt>
+            <p>Price:</p>
+        </dt>
+
+        <dd><input type='text' size='30' placeholder = 'Price' name='price'></dd>
+
+          <dt>
+            <p>Course:</p>
+        </dt>
+
+        <dd><input type='text' size='30' placeholder="Course" name='course'></dd>
+    </dl>
+    </div>
+    <button type="submit" class="btn btn-danger">Create</button>
+ </form>
+</div>
+</body>
+
+</html>

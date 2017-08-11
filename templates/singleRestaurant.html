@@ -1,0 +1,153 @@
+<html>
+
+<head>
+    <title>
+        {{restaurant.name}}
+    </title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href='{{url_for('static',filename='css/style.css ')}}' rel="stylesheet">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"> </script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container well">
+        <div class='nav nav-pills'>
+            <h1>{{restaurant.name}}
+                <a href="{{url_for('createNewMenu',rest_id=restaurant.id)}}" class="btn btn-success">
+    <span class="glyphicon glyphicon-file">
+    </span>Create Menu</a>
+
+                <button id='review' onclick="getReviews(this,{{restaurant.id}})" class="btn btn-success">
+    <span class="glyphicon glyphicon-cutlery">
+    </span> Reviews</buttton>
+
+
+     <button id='map' onclick="getReviews(this,{{restaurant.id}})"  class="btn btn-success pull-right">
+    <span class="glyphicon glyphicon-screenshot">
+    </span>Show Map</buttton>
+</h1>
+<div>
+
+ <div class="modal fade" id="reviews{{restaurant.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title{{restaurant.id}}" id="myModalLabel">Review {{restaurant.name}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <ul id='rev'>
+
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+
+
+    {% if menus!= []%}
+
+    <ul>
+        {% for i in menus %}
+        <!-- <div class="container"> -->
+        <ul class="list-group">
+            <li class="list-group-item clearfix" id='list{{i.id}}'>
+                <span> <h3 class="text-left" id='price{{i.id}}' >
+                            <span class="label label-info">Price : {{i.price}} </span></h3>
+                </span>
+                <div class="title text-center">
+                    <h2 id='name{{i.id}}'> {{i.name}} </h2>
+                </div>
+                <span id='description{{i.id}}' class="label label-default">{{i.description}}</span>
+                <span id='course{{i.id}}' class="label label-default">{{i.course}}</span>
+
+                <span class="pull-right button-group">
+                <button id =`btn{{i.id}}` onclick = "handleOnEdit(this,{{restaurant.id}},{{i.id}})" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-edit"></span>Edit</button>
+                <div class="modal fade" id="editmyModal{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title{{i.id}}" id="myModalLabel">Edit {{i.name}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <form class="form-horizontal" action="{{url_for('editMenu', rest_id=restaurant.id,menu_id=i.id )}}" method='POST'>
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2">Name:</label>
+                                            <input type='text' size='30' name='name' placeholder='{{ i.name}}'>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2">Description:</label>
+                                            <input type='text' size='30' name='desc' placeholder='{{ i.description}}'>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2">Price:</label>
+                                            <input type='text' size='30' name='price' placeholder='{{ i.price}}'>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2">Course:</label>
+                                            <input type='text' size='30' name='course' placeholder='{{ i.course}}'>
+                                        </div>
+
+                                        <input type='submit' class="btn btn-info" value='Update'>
+
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="button" onclick="handleOnDelete(this,{{restaurant.id}},{{i.id}})" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                <div class="modal fade" id="delmyModal{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title{{i.id}}" id="myModalLabel">Delete menu {{i.name}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <form class="form-horizontal" action="{{url_for('delMenu', rest_id=restaurant.id,menu_id=i.id )}}" method='POST'>
+                                        <p>Are you sure you want to delete menu {{i.name}} ?</p>
+                                        <input type='submit' class="btn btn-success" value='Yes'>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                </span>
+            </li>
+        </ul>
+        <!-- </div> -->
+        {% endfor %}
+    </ul>
+    {%else%}
+    <h3> Sorry no menus exist for the current restaurant in the application </h3>
+    {%endif%}
+    <script src="{{url_for('static',filename='js/restaurant.js')}}"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqScH7XDNT11svhIMwZ0sCBmTYgaLFgxU&callback=initMap"></script>
+
+    </div>
+</body>
+
+</html>

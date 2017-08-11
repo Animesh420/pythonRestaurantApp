@@ -1,0 +1,25 @@
+.cd-popup-container .cd-popup-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+}
+
+.img-replace {
+    display: inline-block;
+    overflow: hidden;
+    text-indent: 100%;
+    color: transparent;
+    white-space: nowrap;
+}
+
+a {
+    color: #35a785;
+    text-decoration: none;
+}
+
+ .title h2,
+    .title h3 {
+      display: inline;
+    }
